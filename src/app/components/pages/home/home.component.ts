@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  public isGameStarted: boolean = true;
+  public isGameStarted: boolean = false;
   public gameId: string = "";
 
+  constructor() {}
+
+  public startGame(): void {
+    this.isGameStarted = true;
+  }
 }

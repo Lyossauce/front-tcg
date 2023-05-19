@@ -3,5 +3,9 @@
         *ngIf="isGameStarted"
         [gameId]="gameId"
     ></app-board>
-    Coucou Manu
+    <app-button
+        *ngIf="!isGameStarted"
+        (buttonClicked)="startGame()"
+        [text]="'New Game'"
+    ></app-button>
 </div>
