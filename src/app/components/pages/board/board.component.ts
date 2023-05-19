@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-board',
@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class BoardComponent {
   @Input() gameId : string = "";
+  @Output() goBack: EventEmitter<void> = new EventEmitter<void>();
 }

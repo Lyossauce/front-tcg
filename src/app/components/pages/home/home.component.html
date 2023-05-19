@@ -2,6 +2,7 @@
     <app-board
         *ngIf="isGameStarted"
         [gameId]="gameId"
+        (goBack)="goBack()"
     ></app-board>
     <app-button
         *ngIf="!isGameStarted"

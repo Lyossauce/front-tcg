@@ -14,4 +14,8 @@ export class HomeComponent {
   public startGame(): void {
     this.isGameStarted = true;
   }
+
+  public goBack(): void {
+    this.isGameStarted = false;
+  }
 }
