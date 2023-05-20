@@ -63,7 +63,7 @@ describe('HttpService', () => {
       expect(response).toBeTruthy('No card played');
     });
 
-    const req = httpTestingController.expectOne(`${environment.backurl}/games/${playCardObject.gameId}/players/${playCardObject.playerId}/card`);
+    const req = httpTestingController.expectOne(`${environment.backurl}/games/${playCardObject.gameId}/players/${playCardObject.playerId}/cards`);
     expect(req.request.method).toEqual('POST');
   });
 

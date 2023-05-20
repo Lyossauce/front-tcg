@@ -25,7 +25,7 @@ export class HttpService {
   }
 
   public playCard(playCardObject: PlayCardObject): Observable<any> {
-    return this.http.post(`${this.backUrl}/games/${playCardObject.gameId}/players/${playCardObject.playerId}/card`, 
+    return this.http.post(`${this.backUrl}/games/${playCardObject.gameId}/players/${playCardObject.playerId}/cards`, 
     {cardId: playCardObject.cardId});
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { HttpGetPlayerResponse, Player } from 'src/app/models/player.model';
+import { HttpGetPlayerResponse, PlayCardObject, Player } from 'src/app/models/player.model';
 import { HttpService } from '../http/http.service';
 
 @Injectable({
@@ -27,9 +27,21 @@ export class PlayersService {
   public fetchPlayers(gameId: string): void {
     this.subscription.add(this.httpService.getPlayers(gameId).subscribe({
       next: (response: HttpGetPlayerResponse) => {
-        this.players = [...response.results];
-        this.$players.next([...response.results]);
+        const players = this.formatePlayers(response);
+        this.players = [...players];
+        this.$players.next([...players]);
         this.$playersError.next(undefined);
+      },
+      error: (error: any) => {
+        this.$playersError.next(error.message);
+      }
+    }));
+  }
+
+  public playCard(input: PlayCardObject): void {
+    this.subscription.add(this.httpService.playCard(input).subscribe({
+      next: () => {
+        this.fetchPlayers(input.gameId);
       },
       error: (error: any) => {
         this.$playersError.next(error.message);
@@ -41,6 +53,16 @@ export class PlayersService {
     this.players = [];
     this.$players.next([]);
     this.$playersError.next(undefined);
+  }
+
+  private formatePlayers(response: HttpGetPlayerResponse): Player[] {
+    return response.results.map((player: Player) => {
+      return {
+        ...player,
+        handCardsNumber: player.handCards.length,
+        hiddenCardsNumber: player.hiddenCards.length,
+      }
+    })
   }
 
 }

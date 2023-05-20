@@ -8,6 +8,8 @@ export interface Player {
     mana: number;
     turnNumber: number;
     playOrder: number;
+    handCardsNumber: number;
+    hiddenCardsNumber: number;
 }
 
 export interface PlayCardObject {
@@ -19,3 +21,12 @@ export interface PlayCardObject {
 export interface HttpGetPlayerResponse {
     results: Player[];
 }
+
+export interface PlayerPropertyObject {
+    label: string;
+    propertyName: PlayerProperty;
+    subProp?: SubProperty;
+}
+
+export type PlayerProperty = 'healthPoints'| 'mana'|'handCardsNumber'|'hiddenCardsNumber'
+export type SubProperty = 'length'
