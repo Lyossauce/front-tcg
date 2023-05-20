@@ -1,16 +1,31 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HomeComponent } from './home.component';
-import { ButtonComponent } from '../../elements/button/button.component';
+import { of } from 'rxjs';
+import { MockComponent } from 'ng-mocks';
+import { AppModule } from 'src/app/app.module';
+import { HttpService } from 'src/app/services/http/http.service';
 import { BoardComponent } from '../board/board.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
 
+  const httpServiceSpy : any = jasmine.createSpyObj('HttpService', ["createGame"]);
+
+  
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent, ButtonComponent, BoardComponent]
+      imports: [
+        AppModule
+      ],
+      providers: [
+        { provide: HttpService, useValue: httpServiceSpy }
+      ],
+      declarations: [
+        HomeComponent,
+        MockComponent(BoardComponent)
+      ]
     });
     fixture = TestBed.createComponent(HomeComponent);
     component = fixture.componentInstance;
@@ -28,11 +43,16 @@ describe('HomeComponent', () => {
   });
 
   it('should display board on startGame event', () => {
-    component.isGameStarted = false;
+    httpServiceSpy.createGame.and.returnValue(of({id: "1"}));
+    const callsCount : number = httpServiceSpy.createGame.calls.count();
     component.startGame();
+
     fixture.detectChanges();
     expect(fixture.nativeElement.querySelector('app-board')).toBeTruthy();
+    expect(httpServiceSpy.createGame).toHaveBeenCalledTimes(callsCount + 1);
     expect(component.isGameStarted).toBeTruthy();
+    expect(component.gameId).toEqual("1");
+    expect(component.loading).toBeFalsy();
   });
 
 });
