@@ -8,5 +8,6 @@
         *ngIf="!isGameStarted"
         (buttonClicked)="startGame()"
         [text]="'New Game'"
+        [disabled]="loading"
     ></app-button>
 </div>

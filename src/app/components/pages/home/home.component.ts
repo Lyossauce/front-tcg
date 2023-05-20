@@ -14,6 +14,8 @@ export class HomeComponent {
   public isGameStarted: boolean = false;
   public gameId: string = "";
 
+  public loading: boolean = false;
+
   constructor(
     private httpService: HttpService,
   ) {}
@@ -23,9 +25,11 @@ export class HomeComponent {
   }
 
   public startGame(): void {
+    this.loading = true;
     this.subscription.add(this.httpService.createGame({player1Name: "player1", player2Name: "player2"}).subscribe((response: HttpCreatedBody) => {
       this.gameId = response.id;
       this.isGameStarted = true;
+      this.loading = false;
 
       console.log(this.gameId);
       console.log(this.isGameStarted);
