@@ -1,0 +1,12 @@
+<div class="home">
+    <app-board
+        *ngIf="isGameStarted"
+        [gameId]="gameId"
+        (goBack)="goBack()"
+    ></app-board>
+    <app-button
+        *ngIf="!isGameStarted"
+        (buttonClicked)="startGame()"
+        [text]="'New Game'"
+    ></app-button>
+</div>
