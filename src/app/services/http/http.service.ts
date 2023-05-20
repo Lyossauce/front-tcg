@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { PlayCardObject, Player } from 'src/app/models/player.model';
+import { HttpGetPlayerResponse, PlayCardObject, Player } from 'src/app/models/player.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environments';
@@ -16,8 +16,8 @@ export class HttpService {
     private http: HttpClient
   ) { }
 
-  public getPlayers(gameId: string): Observable<Player[]> {
-    return this.http.get<Player[]>(`${this.backUrl}//games/${gameId}/players`);
+  public getPlayers(gameId: string): Observable<HttpGetPlayerResponse> {
+    return this.http.get<HttpGetPlayerResponse>(`${this.backUrl}/games/${gameId}/players`);
   }
 
   public createGame(body: GameCreationObject): Observable<HttpCreatedBody> {

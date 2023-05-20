@@ -15,3 +15,7 @@ export interface PlayCardObject {
     cardId: string;
     gameId: string;
 }
+
+export interface HttpGetPlayerResponse {
+    results: Player[];
+}

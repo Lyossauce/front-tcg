@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { Player } from 'src/app/models/player.model';
+import { HttpGetPlayerResponse, Player } from 'src/app/models/player.model';
 import { HttpService } from '../http/http.service';
 
 @Injectable({
@@ -26,9 +26,9 @@ export class PlayersService {
 
   public fetchPlayers(gameId: string): void {
     this.subscription.add(this.httpService.getPlayers(gameId).subscribe({
-      next: (players: Player[]) => {
-        this.players = [...players];
-        this.$players.next([...players]);
+      next: (response: HttpGetPlayerResponse) => {
+        this.players = [...response.results];
+        this.$players.next([...response.results]);
         this.$playersError.next(undefined);
       },
       error: (error: any) => {
