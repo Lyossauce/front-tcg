@@ -1,24 +1,37 @@
-<p>board works!</p>
-<app-button
-    (buttonClicked)="goBack.emit()"
-    [text]="'Quit Game'"
-    [disabled]="loading"
-></app-button>
-<app-button
-    (buttonClicked)="skipTurn()"
-    [text]="'Skip Turn'"
-    [disabled]="loading"
-></app-button>
-<app-player
-    *ngFor="let player of passivePlayers"
-    [player]="player"
-></app-player>
-<app-card
-    *ngFor="let card of activePlayer.handCards"
-    (click)="playCard(card)"
-    [disabled]="loading"
-    [card]="card"
-></app-card>
-<app-player
-    [player]="activePlayer"
-></app-player>
+<div class="board">
+    <div class="player-space">
+        <app-player
+            *ngFor="let player of passivePlayers"
+            [player]="player"
+        ></app-player>
+    </div>
+    <div class="playing">Round {{activePlayer.turnNumber +1}}: {{activePlayer.name}} is Playing !</div>
+    <div class="player-space">
+        <div class="menu">
+            <app-button
+                (buttonClicked)="goBack.emit()"
+                [text]="'Quit Game'"
+                [disabled]="loading"
+            ></app-button>
+            <app-button
+                (buttonClicked)="skipTurn()"
+                [text]="'Skip Turn'"
+                [disabled]="loading"
+            ></app-button>
+        </div>
+        <div class="cards">
+            <app-card
+                *ngFor="let card of activePlayer.handCards"
+                (click)="playCard(card)"
+                [disabled]="loading"
+                [card]="card"
+            ></app-card>
+        </div>
+        <div class="active-player">
+            <app-player
+                [player]="activePlayer"
+            ></app-player>
+        </div>
+    </div>
+    
+</div>
