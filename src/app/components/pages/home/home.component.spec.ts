@@ -55,4 +55,9 @@ describe('HomeComponent', () => {
     expect(component.loading).toBeFalsy();
   });
 
+  it('should go back to home on quitGame event', () => {
+    component.goBack();
+    expect(component.isGameStarted).toBeFalsy();
+  });
+
 });

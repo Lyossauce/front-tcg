@@ -25,7 +25,6 @@ export interface HttpGetPlayerResponse {
 export interface PlayerPropertyObject {
     label: string;
     propertyName: PlayerProperty;
-    subProp?: SubProperty;
 }
 
 export type PlayerProperty = 'healthPoints'| 'mana'|'handCardsNumber'|'hiddenCardsNumber'
