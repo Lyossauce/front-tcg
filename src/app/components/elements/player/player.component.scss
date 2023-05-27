@@ -1,0 +1,20 @@
+.player{
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: flex-start;
+    width: 150px;
+    height: 180px;
+    margin: 2px;
+    padding: 10px;
+    background-color: #11567e;
+    color: white
+}
+
+.title{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 30px;
+    padding-top: 10px;
+}

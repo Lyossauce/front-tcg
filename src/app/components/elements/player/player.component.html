@@ -1,0 +1,6 @@
+<div class="player">
+    <div class="title">{{player.name}}</div>
+    <div class="property"
+        *ngFor="let property of PROPERTIES_TO_DISPLAY"
+    >{{property.label}} : {{player[property.propertyName]}}</div>
+</div>

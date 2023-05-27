@@ -10,7 +10,7 @@ describe('PlayersService', () => {
   let service: PlayersService;
   let httpService : HttpService
 
-  const httpServiceSpy = jasmine.createSpyObj('HttpService', ["getPlayers"]);
+  const httpServiceSpy = jasmine.createSpyObj('HttpService', ["getPlayers", "playCard"]);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,6 +44,7 @@ describe('PlayersService', () => {
   });
 
   it('should fetch players with no errors', () => {
+    const players = [...PLAYERS];
     httpServiceSpy.getPlayers.and.returnValue(of({results: PLAYERS}));
     service.fetchPlayers('gameId');
     expect(service['players']).toEqual(PLAYERS);
@@ -65,4 +66,21 @@ describe('PlayersService', () => {
     expect(service['$players'].value).toEqual([]);
     expect(service['$playersError'].value).toEqual(undefined);
   }); 
+
+  it('should play card with no errors', () => {
+    spyOn(service, 'fetchPlayers');
+    httpServiceSpy.playCard.and.returnValue(of({}));
+    service.playCard({gameId: 'gameId', cardId: 'card', playerId: 'playerId'});
+    expect(service.fetchPlayers).toHaveBeenCalledWith('gameId');
+  });
+
+  it('should play card with errors', () => {
+    httpServiceSpy.playCard.and.returnValue(
+      throwError(() => new Error('Error message'))
+    );
+    service.playCard({gameId: 'gameId', cardId: 'card', playerId: 'playerId'});
+    expect(service['$playersError'].value).toEqual('Error message');
+  });
+
+
 });

@@ -1,0 +1,52 @@
+.board{
+    display: flex;
+    flex-direction:column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+}
+
+.player-space{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: space-around;
+    height: 50vh;
+    width: 100%;
+}
+
+.menu{
+    display: flex;
+    flex-direction:column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    width: 20vw;
+}
+
+.cards{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 50vw;
+}
+
+.active-player{
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 20vw;
+}
+
+.playing{
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}

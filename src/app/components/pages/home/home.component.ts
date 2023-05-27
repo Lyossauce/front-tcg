@@ -30,9 +30,6 @@ export class HomeComponent {
       this.gameId = response.id;
       this.isGameStarted = true;
       this.loading = false;
-
-      console.log(this.gameId);
-      console.log(this.isGameStarted);
     }));
   }
 
