@@ -14,6 +14,7 @@ export class BoardComponent {
   public players: Player[] = [];
   public passivePlayers: Player[] = [];
   public activePlayer: Player;
+  public error: string | undefined;
 
   public loading: boolean = true;
 
@@ -29,6 +30,10 @@ export class BoardComponent {
       this.activePlayer = this.players.find((player: Player) => player.isPlaying) as Player;
       this.passivePlayers = this.players.filter((player: Player) => !player.isPlaying);
 
+      this.loading = false;
+    }));
+    this.subscription.add(this.playersService.getPlayersErrorSubject().subscribe((error: string | undefined) => {
+      this.error = error;
       this.loading = false;
     }));
   }

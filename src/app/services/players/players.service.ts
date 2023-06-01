@@ -44,7 +44,7 @@ export class PlayersService {
         this.fetchPlayers(input.gameId);
       },
       error: (error: any) => {
-        this.$playersError.next(error.message);
+        this.$playersError.next("Player cannot do this move.");
       }
     }));
   }
