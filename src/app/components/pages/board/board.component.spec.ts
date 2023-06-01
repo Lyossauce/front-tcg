@@ -10,7 +10,7 @@ describe('BoardComponent', () => {
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
 
-  const playersServiceSpy : any = jasmine.createSpyObj('PlayersService', ["getPlayersSubject", "fetchPlayers", "playCard"]);
+  const playersServiceSpy : any = jasmine.createSpyObj('PlayersService', ["getPlayersSubject", "getPlayersErrorSubject", "fetchPlayers", "playCard"]);
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,6 +23,7 @@ describe('BoardComponent', () => {
       declarations: [BoardComponent]
     });
     playersServiceSpy.getPlayersSubject.and.returnValue(of(PLAYERS));
+    playersServiceSpy.getPlayersErrorSubject.and.returnValue(of('error'));
     fixture = TestBed.createComponent(BoardComponent);
     component = fixture.componentInstance;
     component.gameId = "1";
@@ -49,6 +50,11 @@ describe('BoardComponent', () => {
   it('should display players', () => {
     const players = fixture.debugElement.nativeElement.querySelectorAll('app-player');
     expect(players.length).toBe(PLAYERS.length);
+  });
+
+  it('should display error', () => {
+    const error = fixture.debugElement.nativeElement.querySelector('.error');
+    expect(error.textContent).toBe("error");
   });
 
   it('should display cards', () => {

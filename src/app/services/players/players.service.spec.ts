@@ -79,7 +79,7 @@ describe('PlayersService', () => {
       throwError(() => new Error('Error message'))
     );
     service.playCard({gameId: 'gameId', cardId: 'card', playerId: 'playerId'});
-    expect(service['$playersError'].value).toEqual('Error message');
+    expect(service['$playersError'].value).toEqual('Player cannot do this move.');
   });
 
 
